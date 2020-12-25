@@ -7,12 +7,23 @@ testRouter.get('/getTime', (req, res) => {
 })
 
 testRouter.get('/getRandomString', (req, res) => {
-  console.log(req.query.word)
-  let res = req.query.word
-  while (res.length < 10) {
-    res += res
+  let rs = req.query.word || 'a'
+  while (rs.length < 10) {
+    rs += rs
   }
-  res.send(res)
+  res.send(rs)
+})
+
+testRouter.get('/getRandomStringDelay', (req, res) => {
+  let rs = req.query.word || 'a'
+  while (rs.length < 10) {
+    rs += rs
+  }
+  function getNum(num){
+    return num <= 2 ? num : getNum(num - 1) + getNum(num - 2)
+  }
+  rs += getNum(42)
+  res.send(rs)
 })
 
 module.exports = testRouter
