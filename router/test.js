@@ -16,13 +16,13 @@ testRouter.get('/getRandomString', (req, res) => {
 
 testRouter.get('/getRandomStringDelay', (req, res) => {
   let rs = req.query.word || 'a'
-  while (rs.length < 10) {
-    rs += rs
-  }
   function getNum(num){
     return num <= 2 ? num : getNum(num - 1) + getNum(num - 2)
   }
-  rs += getNum(42)
+  let delta = +new Date()
+  getNum(42)
+  delta = new Date() - delta
+  rs += `耗时：${delta}`
   res.send(rs)
 })
 
