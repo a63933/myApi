@@ -6,6 +6,10 @@ testRouter.get('/getTime', (req, res) => {
   res.send(+new Date() + '')
 })
 
+testRouter.get('/getString/:string?', (req, res) => {
+  res.send(req.params.string)
+})
+
 testRouter.get('/getRandomString', (req, res) => {
   let rs = req.query.word || 'a'
   while (rs.length < 10) {
